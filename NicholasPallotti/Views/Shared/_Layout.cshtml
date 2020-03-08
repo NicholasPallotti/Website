@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="~/Content/StyleSheet1.css" type="text/css" rel="stylesheet" />
+    <title>magical site</title>
+</head>
+<body>
+    <div id="header">Magic The Gathering</div>
+
+    <div id="Navbar">
+        <div class="li"><a href="~/Home/Index">Home</a></div>
+        <div class="li"><a href="https://magic.wizards.com/en/game-info/gameplay/formats/modern">Modern</a></div>
+        <div class="li"><a href="https://magic.wizards.com/en/game-info/gameplay/formats/legacy">Legacy</a></div>
+        <div class="li"><a href="https://magic.wizards.com/en/game-info/gameplay/formats/pioneer">Pioneer</a></div>
+        <div class="li"><a href="~/Mailing/Index">MailingLabel</a></div>
+        <div class="li"><a href="~/Home/About">About</a></div>
+        <div class="li"><a href="~/Test/WageCalculator">Wage Calculator</a></div>
+
+    </div>
+
+    <div id="main">
+        @RenderBody()
+    </div>
+    
+    <div id="footer">
+            <p>&copy; @DateTime.Now.Year - no copyright intended or something</p>     
+    </div>
+
+
+</body>
+</html>

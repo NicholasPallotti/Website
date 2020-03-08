@@ -1,0 +1,88 @@
+﻿
+@model NicholasPallotti.Models.EmployeeViewModel
+
+@{
+    ViewBag.Title = "Wage Calculator";
+}
+
+<style type="text/css">
+    .FormTable {
+        margin-left: 25px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+        .FormTable td {
+            padding: 10px;
+        }
+
+    fieldset {
+        border-color: darkmagenta;
+        margin-top: 20px;
+    }
+
+    .DisplayInput {
+        border: solid 2px black;
+        display: inline-block;
+        margin-left: 50px;
+        padding: 5px;
+        min-width: 250px;
+        min-height: 75px;
+    }
+   
+</style>
+
+<h2>This page will calculate an employees wages</h2>
+
+@using (Html.BeginForm("Index", "Test", new { Area = "" }, FormMethod.Post, new { id = "WageForm" }))
+{
+    <fieldset>
+        <legend>Employee Information</legend>
+        <table class="FormTable">
+
+            <tr>
+                <td>@Html.LabelFor(m => m.employee.Name)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.employee.Name)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.employee.EmployeeNumber)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.employee.EmployeeNumber)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.employee.Hours)</td>
+                <td>@Html.TextBoxFor(m => m.employee.Hours)
+                
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.employee.Rate)</td>
+                <td>@Html.TextBoxFor(m => m.employee.Rate)</td>
+            </tr>
+          
+
+
+        </table>
+    </fieldset>
+    <fieldset>
+        <legend>Calculated Wage</legend>
+        <table>
+            <tr>
+                <td>
+                    <input type="submit" value="calculate wage" />
+                </td>
+                <td>
+                    <div class="DisplayInput">
+                        @Html.Raw(Model.employee.HtmlFormattedFormData)
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}
+
+
+

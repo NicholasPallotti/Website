@@ -1,0 +1,189 @@
+﻿
+@model NicholasPallotti.Models.PersonViewModel
+
+@{
+    ViewBag.Title = "Shipping Page";
+}
+
+<style type="text/css">
+
+
+    .FormTable {
+        margin-left: 25px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+        .FormTable td {
+            padding: 10px;
+        }
+
+    .well {
+        position: relative;
+        overflow: hidden;
+    }
+
+    fieldset {
+        display: inline-block;
+        border-color: darkmagenta;
+        margin-top: 20px;
+        width: 40%;
+    }
+
+    .DisplayInput {
+        background-color: white;
+        border: solid 2px black;
+        display: inline-block;
+        margin-left: 50px;
+        padding: 5px;
+        min-width: 250px;
+        min-height: 75px;
+    }
+
+    /*text of the error message*/
+    .field-validation-error {
+        color: red;
+    }
+    /*hide the error message if the field is valid*/
+    .field-validation-valid {
+        display: none;
+    }
+    /*red border around field in error*/
+    .input-validation-error {
+        border: 1px solid red;
+    }
+</style>
+
+<h2>This page will display and update data using the view model Product View Model</h2>
+
+@using (Html.BeginForm("Index", "Shipping", new { Area = "" }, FormMethod.Post, new { id = "ShippingForm" }))
+{
+    <fieldset>
+        <legend>From</legend>
+        <table class="FormTable">
+
+            <tr>
+                <td>@Html.LabelFor(m => m.package.Sender.FirstName)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.package.Sender.FirstName)
+                    @Html.ValidationMessageFor(m => m.mailingFrom.FirstName, "First Name is required.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.package.Sender.LastName)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.package.Sender.LastName)
+                    @Html.ValidationMessageFor(m => m.mailingFrom.LastName, "Last Name is required.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.package.Sender.Address)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.package.Sender.Address)
+                    @Html.ValidationMessageFor(m => m.mailingFrom.Address, "Address is required.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.package.Sender.City)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.package.Sender.City)
+                    @Html.ValidationMessageFor(m => m.package.Sender.City, "City is required.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.package.Sender.StateId)</td>
+                <td>
+                    @Html.DropDownListFor(m => m.package.Sender.State, Model.StatesList)
+                    @Html.ValidationMessageFor(m => m.package.Sender.State, "State is required.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.package.Sender.Zip)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.package.Sender.Zip)
+                    @Html.ValidationMessageFor(m => m.package.Sender.Zip, "Zip is required.")
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <legend>To</legend>
+        <table class="FormTable">
+
+            <tr>
+                <td>@Html.LabelFor(m => m.package.Recipient.FirstName)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.package.Recipient.FirstName)
+                    @Html.ValidationMessageFor(m => m.mailingTo.FirstName, "First Name is required.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.package.Recipient.LastName)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.package.Recipient.LastName)
+                    @Html.ValidationMessageFor(m => m.package.Recipient.LastName, "Last Name is required.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.package.Recipient.Address)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.package.Recipient.Address)
+                    @Html.ValidationMessageFor(m => m.package.Recipient.Address, "Address is required.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.package.Recipient.City)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.package.Recipient.City)
+                    @Html.ValidationMessageFor(m => m.package.Recipient.City, "City is required.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.package.Recipient.StateId)</td>
+                <td>
+                    @Html.DropDownListFor(m => m.package.Recipient.State, Model.StatesList)
+                    @Html.ValidationMessageFor(m => m.package.Recipient.State, "State is required.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.package.Recipient.Zip)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.package.Recipient.Zip)
+                    @Html.ValidationMessageFor(m => m.package.Recipient.Zip, "Zip is required.")
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <legend>Shipping Method</legend>
+    </fieldset>
+
+    <fieldset>
+        <legend>Package Information</legend>
+    </fieldset>
+
+    <fieldset>
+        <legend>Shipping Label</legend>
+        <table>
+            <tr>
+                <td>
+                    <input type="submit" value="create mailing label" />
+                </td>
+                <td>
+                    <div class="DisplayInput">
+                        <p>From:</p>
+                        @Html.Raw(Model.mailingFrom.HtmlFormattedFormData)
+                        <p>To:</p>
+                        @Html.Raw(Model.mailingTo.HtmlFormattedFormData)
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+}
+
+
+

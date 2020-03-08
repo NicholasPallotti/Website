@@ -1,0 +1,116 @@
+﻿
+@model NicholasPallotti.Models.PersonViewModel
+
+@{
+    ViewBag.Title = "Mailing Page";
+}
+
+<style type="text/css">
+    .FormTable {
+        margin-left: 25px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+        .FormTable td {
+            padding: 10px;
+        }
+
+    fieldset {
+        border-color: darkmagenta;
+        margin-top: 20px;
+    }
+
+    .DisplayInput {
+        border: solid 2px black;
+        display: inline-block;
+        margin-left: 50px;
+        padding: 5px;
+        min-width: 250px;
+        min-height: 75px;
+    }
+     /*text of the error message*/
+    .field-validation-error {
+        color: red;
+    }
+    /*hide the error message if the field is valid*/
+    .field-validation-valid {
+        display: none;
+    }
+    /*red border around field in error*/
+    .input-validation-error {
+        border: 1px solid red;
+    }
+</style>
+
+<h2>This page will display and update data using the view model Product View Model</h2>
+
+@using (Html.BeginForm("Index", "Mailing", new { Area = "" }, FormMethod.Post, new { id = "MailingForm" }))
+{
+    <fieldset>
+        <legend>Mailing Information</legend>
+        <table class="FormTable">
+                
+            <tr>
+                <td>@Html.LabelFor(m => m.mailing.FirstName)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.mailing.FirstName)
+                    @Html.ValidationMessageFor(m => m.mailing.FirstName, "First Name is required.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.mailing.LastName)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.mailing.LastName)
+                    @Html.ValidationMessageFor(m => m.mailing.LastName, "Last Name is required.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.mailing.Address)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.mailing.Address)
+                    @Html.ValidationMessageFor(m => m.mailing.Address, "Address is required.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.mailing.City)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.mailing.City)
+                    @Html.ValidationMessageFor(m => m.mailing.City, "City is required.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.mailing.StateId)</td>
+                <td>
+                    @Html.DropDownListFor(m => m.mailing.State, Model.StatesList)
+                    @Html.ValidationMessageFor(m => m.mailing.State, "State is required.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.mailing.Zip)</td>
+                <td>
+                    @Html.TextBoxFor(m => m.mailing.Zip)
+                    @Html.ValidationMessageFor(m => m.mailing.Zip, "Zip is required.")
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <fieldset>
+        <legend>Mailing info Retrieved</legend>
+        <table>
+            <tr>
+                <td>
+                    <input type="submit" value="create mailing label" />
+                </td>
+                <td>
+                    <div class="DisplayInput">
+                        @Html.Raw(Model.mailing.HtmlFormattedFormData)
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}
+
+
+

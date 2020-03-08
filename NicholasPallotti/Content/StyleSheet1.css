@@ -1,0 +1,48 @@
+﻿body {
+    background-color: darkslateblue;
+}
+
+#header {
+    background-color: darkcyan;
+    padding: 10px;
+    margin: 20px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+#Navbar {
+    background-color: highlight;
+    padding: 10px;
+    margin: 20px;
+    margin-left: 200px;
+    margin-right: 200px;
+    position: center;
+    background-size: auto;
+    font-weight: bolder;
+    font-size: larger;
+    text-align: center;
+}
+
+.li {
+    margin: 40px;
+    display: inline;
+}
+
+#main {
+    background-color: darkcyan;
+    padding: 10px;
+    margin: 20px;
+    font-weight: normal;
+    font-family: Arial;
+}
+
+#LeftColumn {
+    float: left;
+    width: 25%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#footer {
+}
