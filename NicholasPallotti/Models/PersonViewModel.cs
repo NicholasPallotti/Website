@@ -7,9 +7,7 @@ namespace NicholasPallotti.Models
     {
         //example of composition, a seperate class for product will be more re-usable 
         //than having it in the view model
-        public Person mailingFrom { get; set; }
-        public Person mailingTo { get; set; }
-        public Package package { get; set; }
+        public Person mailing { get; set; }
 
         //This is the lisstatest of Manufactures
         public SelectList StatesList
@@ -35,8 +33,7 @@ namespace NicholasPallotti.Models
         //constructor creates instance of Product to prevent null reference exceptions
         public PersonViewModel()
         {
-            mailingFrom = new Person();
-            mailingTo = new Person();
+            mailing = new Person();
         }
     }
 

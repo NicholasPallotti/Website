@@ -12,7 +12,7 @@ namespace NicholasPallotti.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            PersonViewModel fillerData = new PersonViewModel();
+            PackageViewModel fillerData = new PackageViewModel();
             fillerData.package.Recipient.FirstName = "John";
             fillerData.package.Recipient.LastName = "Smith";
             fillerData.package.Recipient.Address = "123 Glennsdale dr.";
@@ -31,7 +31,7 @@ namespace NicholasPallotti.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(PersonViewModel model)
+        public ActionResult Index(PackageViewModel model)
         {
             //return the data in the web page
             return View(model);

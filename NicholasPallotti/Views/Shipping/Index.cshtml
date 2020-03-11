@@ -1,5 +1,5 @@
 ﻿
-@model NicholasPallotti.Models.PersonViewModel
+@model NicholasPallotti.Models.PackageViewModel
 
 @{
     ViewBag.Title = "Shipping Page";
@@ -63,42 +63,42 @@
         <table class="FormTable">
 
             <tr>
-                <td>@Html.LabelFor(m => m.package.Sender.FirstName)</td>
+                <td>@Html.LabelFor(m => m.package.Sender.FirstName, "First Name")</td>
                 <td>
                     @Html.TextBoxFor(m => m.package.Sender.FirstName)
-                    @Html.ValidationMessageFor(m => m.mailingFrom.FirstName, "First Name is required.")
+                    @Html.ValidationMessageFor(m => m.package.Sender.FirstName, "First Name is required.")
                 </td>
             </tr>
             <tr>
-                <td>@Html.LabelFor(m => m.package.Sender.LastName)</td>
+                <td>@Html.LabelFor(m => m.package.Sender.LastName.Length, "Last Name")</td>
                 <td>
                     @Html.TextBoxFor(m => m.package.Sender.LastName)
-                    @Html.ValidationMessageFor(m => m.mailingFrom.LastName, "Last Name is required.")
+                    @Html.ValidationMessageFor(m => m.package.Sender.LastName, "Last Name is required.")
                 </td>
             </tr>
             <tr>
-                <td>@Html.LabelFor(m => m.package.Sender.Address)</td>
+                <td>@Html.LabelFor(m => m.package.Sender.Address, "Address")</td>
                 <td>
                     @Html.TextBoxFor(m => m.package.Sender.Address)
-                    @Html.ValidationMessageFor(m => m.mailingFrom.Address, "Address is required.")
+                    @Html.ValidationMessageFor(m => m.package.Sender.Address, "Address is required.")
                 </td>
             </tr>
             <tr>
-                <td>@Html.LabelFor(m => m.package.Sender.City)</td>
+                <td>@Html.LabelFor(m => m.package.Sender.City, "City")</td>
                 <td>
                     @Html.TextBoxFor(m => m.package.Sender.City)
                     @Html.ValidationMessageFor(m => m.package.Sender.City, "City is required.")
                 </td>
             </tr>
             <tr>
-                <td>@Html.LabelFor(m => m.package.Sender.StateId)</td>
+                <td>@Html.LabelFor(m => m.package.Sender.StateId, "State")</td>
                 <td>
                     @Html.DropDownListFor(m => m.package.Sender.State, Model.StatesList)
                     @Html.ValidationMessageFor(m => m.package.Sender.State, "State is required.")
                 </td>
             </tr>
             <tr>
-                <td>@Html.LabelFor(m => m.package.Sender.Zip)</td>
+                <td>@Html.LabelFor(m => m.package.Sender.Zip, "Zip code")</td>
                 <td>
                     @Html.TextBoxFor(m => m.package.Sender.Zip)
                     @Html.ValidationMessageFor(m => m.package.Sender.Zip, "Zip is required.")
@@ -112,42 +112,42 @@
         <table class="FormTable">
 
             <tr>
-                <td>@Html.LabelFor(m => m.package.Recipient.FirstName)</td>
+                <td>@Html.LabelFor(m => m.package.Recipient.FirstName, "First Name")</td>
                 <td>
                     @Html.TextBoxFor(m => m.package.Recipient.FirstName)
-                    @Html.ValidationMessageFor(m => m.mailingTo.FirstName, "First Name is required.")
+                    @Html.ValidationMessageFor(m => m.package.Recipient.FirstName, "First Name is required.")
                 </td>
             </tr>
             <tr>
-                <td>@Html.LabelFor(m => m.package.Recipient.LastName)</td>
+                <td>@Html.LabelFor(m => m.package.Recipient.LastName, "Last Name")</td>
                 <td>
                     @Html.TextBoxFor(m => m.package.Recipient.LastName)
                     @Html.ValidationMessageFor(m => m.package.Recipient.LastName, "Last Name is required.")
                 </td>
             </tr>
             <tr>
-                <td>@Html.LabelFor(m => m.package.Recipient.Address)</td>
+                <td>@Html.LabelFor(m => m.package.Recipient.Address, "Address")</td>
                 <td>
                     @Html.TextBoxFor(m => m.package.Recipient.Address)
                     @Html.ValidationMessageFor(m => m.package.Recipient.Address, "Address is required.")
                 </td>
             </tr>
             <tr>
-                <td>@Html.LabelFor(m => m.package.Recipient.City)</td>
+                <td>@Html.LabelFor(m => m.package.Recipient.City, "City")</td>
                 <td>
                     @Html.TextBoxFor(m => m.package.Recipient.City)
                     @Html.ValidationMessageFor(m => m.package.Recipient.City, "City is required.")
                 </td>
             </tr>
             <tr>
-                <td>@Html.LabelFor(m => m.package.Recipient.StateId)</td>
+                <td>@Html.LabelFor(m => m.package.Recipient.StateId, "State")</td>
                 <td>
                     @Html.DropDownListFor(m => m.package.Recipient.State, Model.StatesList)
                     @Html.ValidationMessageFor(m => m.package.Recipient.State, "State is required.")
                 </td>
             </tr>
             <tr>
-                <td>@Html.LabelFor(m => m.package.Recipient.Zip)</td>
+                <td>@Html.LabelFor(m => m.package.Recipient.Zip, "Zip")</td>
                 <td>
                     @Html.TextBoxFor(m => m.package.Recipient.Zip)
                     @Html.ValidationMessageFor(m => m.package.Recipient.Zip, "Zip is required.")
@@ -174,9 +174,9 @@
                 <td>
                     <div class="DisplayInput">
                         <p>From:</p>
-                        @Html.Raw(Model.mailingFrom.HtmlFormattedFormData)
+                        @Html.Raw(Model.package.Sender.HtmlFormattedFormData)
                         <p>To:</p>
-                        @Html.Raw(Model.mailingTo.HtmlFormattedFormData)
+                        @Html.Raw(Model.package.Recipient.HtmlFormattedFormData)
                     </div>
                 </td>
             </tr>

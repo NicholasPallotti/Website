@@ -14,12 +14,12 @@ namespace NicholasPallotti.Controllers
         {
 
             PersonViewModel fillerData = new PersonViewModel();
-            fillerData.mailingFrom.FirstName = "John";
-            fillerData.mailingFrom.LastName = "Smith";
-            fillerData.mailingFrom.Address = "123 Glennsdale dr.";
-            fillerData.mailingFrom.City = "Montgomery";
-            fillerData.mailingFrom.State = "Alabama";
-            fillerData.mailingFrom.Zip = "80808";
+            fillerData.mailing.FirstName = "John";
+            fillerData.mailing.LastName = "Smith";
+            fillerData.mailing.Address = "123 Glennsdale dr.";
+            fillerData.mailing.City = "Montgomery";
+            fillerData.mailing.State = "Alabama";
+            fillerData.mailing.Zip = "80808";
 
             return View(fillerData);
         }
