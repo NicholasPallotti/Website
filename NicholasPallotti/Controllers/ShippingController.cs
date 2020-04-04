@@ -33,8 +33,51 @@ namespace NicholasPallotti.Controllers
         [HttpPost]
         public ActionResult Index(PackageViewModel model)
         {
+
+            switch (model.shippingType)
+            {
+                case "Standard":
+                    Package package = new Package();
+                    LoadPackageFromForm(package, model);
+                    model.package = package;
+                    break;
+                case "Two Day":
+                    TwoDayPackage twoDayPackage = new TwoDayPackage(5);
+                    LoadPackageFromForm(twoDayPackage, model);
+                    model.package = twoDayPackage;
+                    break;
+                case "Overnight":
+                    OvernightPackage overnightPackage = new OvernightPackage(10);
+                    LoadPackageFromForm(overnightPackage, model);
+                    model.package = overnightPackage;
+                    break;
+            }
             //return the data in the web page
             return View(model);
+        }
+
+        private void LoadPackageFromForm(Package myPackage, PackageViewModel model)
+        {
+            myPackage.weight = model.package.weight;
+            myPackage.costPerOunce = model.package.costPerOunce;
+
+            //set sender info
+            myPackage.Sender.FirstName = model.package.Sender.FirstName;
+            myPackage.Sender.LastName = model.package.Sender.LastName;
+            myPackage.Sender.Address = model.package.Sender.Address;
+            myPackage.Sender.City = model.package.Sender.City;
+            myPackage.Sender.State = model.package.Sender.State;
+            myPackage.Sender.Zip = model.package.Sender.Zip;
+
+            //set recipient info
+            myPackage.Recipient.FirstName = model.package.Sender.FirstName;
+            myPackage.Recipient.LastName = model.package.Sender.LastName;
+            myPackage.Recipient.Address = model.package.Sender.Address;
+            myPackage.Recipient.City = model.package.Sender.City;
+            myPackage.Recipient.State = model.package.Sender.State;
+            myPackage.Recipient.Zip = model.package.Sender.Zip;
+
+           // myPackage.calculateCost();
         }
     }
 }

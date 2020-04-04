@@ -18,10 +18,10 @@
             padding: 10px;
         }
 
-    .well {
+    /*.well {
         position: relative;
         overflow: hidden;
-    }
+    }*/
 
     fieldset {
         display: inline-block;
@@ -54,7 +54,7 @@
     }
 </style>
 
-<h2>This page will display and update data using the view model Product View Model</h2>
+<h2>this is the shipping page</h2>
 
 @using (Html.BeginForm("Index", "Shipping", new { Area = "" }, FormMethod.Post, new { id = "ShippingForm" }))
 {
@@ -158,10 +158,45 @@
 
     <fieldset>
         <legend>Shipping Method</legend>
+        <table class="FormTable">
+            <tr>
+                <td>
+                    @foreach (var Shipping in Model.ShippingTypeList)
+                    {
+                        @Html.RadioButtonFor(m => m.shippingType, Shipping.Description) @Shipping.Description
+                    }
+                </td>
+            </tr>
+        </table>
     </fieldset>
 
     <fieldset>
         <legend>Package Information</legend>
+        <table class="FormTable">
+            <tr>
+                <td>@Html.LabelFor(m => m.package.weight, "Weight")</td>
+                <td>
+                    @Html.TextBoxFor(m => m.package.weight)
+                    @Html.ValidationMessageFor(m => m.package.weight, "weight must be greater than one ounce.")
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.package.costPerOunce, "Cost Per Ounce")</td>
+                <td>
+                    @Html.TextBoxFor(m => m.package.costPerOunce)
+                    @Html.ValidationMessageFor(m => m.package.costPerOunce, "Cost Per Ounce must be atleast $1.00")
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.package.totalCost, "shipping cost")
+                </td>
+                <td>
+                     @Html.TextBoxFor(m => m.package.totalCost)
+                </td>
+            </tr>
+
+        </table>
     </fieldset>
 
     <fieldset>
@@ -169,15 +204,23 @@
         <table>
             <tr>
                 <td>
-                    <input type="submit" value="create mailing label" />
-                </td>
-                <td>
                     <div class="DisplayInput">
                         <p>From:</p>
                         @Html.Raw(Model.package.Sender.HtmlFormattedFormData)
                         <p>To:</p>
                         @Html.Raw(Model.package.Recipient.HtmlFormattedFormData)
                     </div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <legend>actions</legend>
+        <table>
+            <tr>
+                <td>
+                    <input type="submit" value="Calculate Package Info" />
                 </td>
             </tr>
         </table>

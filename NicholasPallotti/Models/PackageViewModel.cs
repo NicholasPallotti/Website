@@ -8,7 +8,8 @@ namespace NicholasPallotti.Models
         //example of composition, a seperate class for product will be more re-usable 
         //than having it in the view model
         public Package package { get; set; }
-  
+
+        public string shippingType { get; set; }
 
         //This is the lisstatest of Manufactures
         public SelectList StatesList
@@ -31,15 +32,15 @@ namespace NicholasPallotti.Models
             }
         }
 
-        public List<ListItem> ShippingType
+        public List<ListItem> ShippingTypeList
         {
             get
             {
                 List<ListItem> shipping = new List<ListItem>();
 
-                shipping.Add(new ListItem("Standard"));
-                shipping.Add(new ListItem("Two Day"));
-                shipping.Add(new ListItem("Overnight"));
+                shipping.Add(new ListItem("Standard", "Standard"));
+                shipping.Add(new ListItem("Two Day", "Two Day"));
+                shipping.Add(new ListItem("Overnight", "Overnight"));
 
                 return shipping;
 
@@ -49,10 +50,11 @@ namespace NicholasPallotti.Models
         public class ListItem
         {
             public string Shipping { get; set; }
-
-            public ListItem(string shipping)
+            public string Description { get; set; }
+            public ListItem(string description, string shipping)
             {
                 Shipping = shipping;
+                Description = description;
             }
         }
 
@@ -60,6 +62,7 @@ namespace NicholasPallotti.Models
         public PackageViewModel()
         {
             package = new Package();
+            shippingType = "standard";
         }
     }
 }
