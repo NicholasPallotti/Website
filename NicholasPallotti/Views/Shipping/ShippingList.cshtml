@@ -1,0 +1,54 @@
+﻿@model NicholasPallotti.Models.PackageListViewModel
+
+@{
+    ViewBag.Title = "Shipping List";
+}
+
+<style type="text/css">
+    th, td {
+        padding: 5px;
+        border: solid 2px green;
+    }
+
+    .SortButton {
+        margin-right: 10px;
+    }
+</style>
+
+<h2>ShippingList</h2>
+
+<a href="@Url.Action("index", "Shipping", new { Area="", id = ""})" title="Add New Package"><img src="~/Images/add.png" alt="Add Package" /></a>
+<a href="@Url.Action("ShippingList", "Shipping", new { Area="", sortDirection = "asc"})" title="Sort Ascending"><img src="~/Images/sortAsc.png" alt="Sort the List" /></a>
+<a href="@Url.Action("ShippingList", "Shipping", new { Area="", sortDirection = "desc"})" title="Sort Descending"><img src="~/Images/sortDesc.png" alt="Sort the List" /></a>
+
+<table style="margin-top:10px;">
+    <tr>
+        <th>Edit</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Weight</th>
+        <th>Cost Per Ounce</th>
+        <th>Shipping Cost</th>
+        <th>Delete</th>
+    </tr>
+    @foreach (var package in Model.Packages)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("Index", "Shipping", new { Area="", id = package.uniqueId})">
+                    <img src="~/images/Edit.png" alt="Edit" title="Edit" style="border:none" />
+                </a>
+            </td>
+            <td>@Html.Raw(package.Sender.HtmlFormattedFormData)</td>
+            <td>@Html.Raw(package.Recipient.HtmlFormattedFormData)</td>
+            <td>@package.weight.ToString("f2")</td>
+            <td>@package.costPerOunce.ToString("C")</td>
+            <td>@package.totalCost.ToString("C")</td>
+            <td>
+                <a href="@Url.Action("Delete", "Shipping", new { Area="", id = package.uniqueId})">
+                    <img src="~/images/delete.png" alt="Edit" title="Delete" style="border:none" />
+                </a>
+            </td>
+        </tr>
+    }
+</table>

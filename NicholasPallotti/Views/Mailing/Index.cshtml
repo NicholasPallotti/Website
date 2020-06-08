@@ -29,7 +29,7 @@
         min-width: 250px;
         min-height: 75px;
     }
-     /*text of the error message*/
+    /*text of the error message*/
     .field-validation-error {
         color: red;
     }
@@ -50,7 +50,7 @@
     <fieldset>
         <legend>Mailing Information</legend>
         <table class="FormTable">
-                
+
             <tr>
                 <td>@Html.LabelFor(m => m.mailing.FirstName)</td>
                 <td>
@@ -82,7 +82,7 @@
             <tr>
                 <td>@Html.LabelFor(m => m.mailing.StateId)</td>
                 <td>
-                    @Html.DropDownListFor(m => m.mailing.State, Model.StatesList)
+                    @Html.DropDownListFor(m => m.mailing.StateId, Model.StatesList)
                     @Html.ValidationMessageFor(m => m.mailing.State, "State is required.")
                 </td>
             </tr>
@@ -95,16 +95,17 @@
             </tr>
         </table>
     </fieldset>
+
     <fieldset>
         <legend>Mailing info Retrieved</legend>
         <table>
             <tr>
                 <td>
-                    <input type="submit" value="create mailing label" />
+                    <input type="button" value="create mailing label" onclick="getMailingLabel()" />
                 </td>
                 <td>
-                    <div class="DisplayInput">
-                        @Html.Raw(Model.mailing.HtmlFormattedFormData)
+                    <div class="DisplayInput" id="DisplayLabel">
+                        @*@Html.Raw(Model.mailing.HtmlFormattedFormData)*@
                     </div>
                 </td>
             </tr>
@@ -112,5 +113,29 @@
     </fieldset>
 }
 
+<script type="text/javascript">
+    function getMailingLabel() {
+
+        //retrieve and store the data for the recipient
+        var mailing_firstName = document.getElementById("mailing_FirstName");
+        var mailing_lastName = document.getElementById("mailing_LastName");
+        var mailing_address = document.getElementById("mailing_Address");
+        var mailing_city = document.getElementById("mailing_City");
+        var stateId = mailing_StateId.options[mailing_StateId.selectedIndex].value;
+        var mailing_zip = document.getElementById("mailing_Zip");
+
+        //combine elements into the string that is the result
+        var label = mailing_firstName.value + " " + mailing_lastName.value + "<br/>";
+        label = label + mailing_address.value + "<br />";
+        label = label + mailing_City.value + ", " + stateId + " " + mailing_zip.value;
+
+        //display the result in the console
+        console.log(label);
+
+        //display info on the page
+        var DisplayLabel = document.getElementById('DisplayLabel');
+        DisplayLabel.innerHTML = label;
+    }
+</script>
 
 

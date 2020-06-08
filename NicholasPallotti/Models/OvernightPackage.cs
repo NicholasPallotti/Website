@@ -1,13 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Web.Mvc;
+using System;
 
 namespace NicholasPallotti.Models
 {
+    [Serializable]
     public class OvernightPackage : Package
     {
-        [Range(5, 100, ErrorMessage = "flat fee must be at least $5")]
-        private decimal _feePerOunce;
+
+        [Range(5, 100, ErrorMessage = "fee per ounce must be at least $5")]
+        private decimal _feePerOunce = 10;
 
         public decimal feePerOunce
         {
@@ -25,21 +28,19 @@ namespace NicholasPallotti.Models
         {
             feePerOunce = Fee;
         }
-
-        private decimal _totalCost;
+        public OvernightPackage()
+        {
+            feePerOunce = 10;
+        }
 
         public override decimal totalCost
         {
             get
             {
-                return base.totalCost + _feePerOunce;
+                return base.totalCost + (_feePerOunce * base.weight);
             }
         }
-
-        //public override void calculateCost()
-        //{
-        //    totalCost = ((FeePerOunce + CostPerOunce) * (decimal)weight);
-        //}
+       
 
 
     }

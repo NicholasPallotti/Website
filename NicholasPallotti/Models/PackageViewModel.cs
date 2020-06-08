@@ -5,13 +5,11 @@ namespace NicholasPallotti.Models
 {
     public class PackageViewModel
     {
-        //example of composition, a seperate class for product will be more re-usable 
-        //than having it in the view model
         public Package package { get; set; }
 
         public string shippingType { get; set; }
 
-        //This is the lisstatest of Manufactures
+        //This is the list of states
         public SelectList StatesList
         {
             get
@@ -57,12 +55,26 @@ namespace NicholasPallotti.Models
                 Description = description;
             }
         }
-
-        //constructor creates instance of Product to prevent null reference exceptions
         public PackageViewModel()
         {
             package = new Package();
             shippingType = "standard";
+
+            package.Sender.FirstName = "Jane";
+            package.Sender.LastName = "Seymour";
+            package.Sender.Address = "2345 First Avenue";
+            package.Sender.City = "Hollywood";
+            package.Sender.State = "CA";
+            package.Sender.Zip = "90034";
+
+            package.Recipient.FirstName = "Steve";
+            package.Recipient.LastName = "Jones";
+            package.Recipient.Address = "2345 West Broadway";
+            package.Recipient.City = "Boulder";
+            package.Recipient.State = "CO";
+            package.Recipient.Zip = "80524";
         }
+
     }
+
 }

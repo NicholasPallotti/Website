@@ -2,8 +2,11 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <link href="~/Content/StyleSheet1.css" type="text/css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>magical site</title>
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/StyleSheet1.css" type="text/css" rel="stylesheet" />
+
 </head>
 <body>
     <div id="header">Magic The Gathering</div>
@@ -17,17 +20,20 @@
         <div class="li"><a href="~/Home/About">About</a></div>
         <div class="li"><a href="~/Test/WageCalculator">Wage Calculator</a></div>
         <div class="li"><a href="~/Shipping/Index">Shipping</a></div>
+        <div class="li"><a href="~/Shipping/ShippingList">Shipping List</a></div>
 
     </div>
 
     <div id="main">
         @RenderBody()
     </div>
-    
+
     <div id="footer">
-            <p>&copy; @DateTime.Now.Year - no copyright intended or something</p>     
+        <p>&copy; @DateTime.Now.Year - no copyright intended or something</p>
     </div>
 
-
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Web.Mvc;
+using System;
 
 namespace NicholasPallotti.Models
 {
+    [Serializable]
     public class Person
     {
 
@@ -23,6 +25,8 @@ namespace NicholasPallotti.Models
         [Required]
         public string Zip { get; set; }
 
+        public string UniqueId { get; set; }
+
 
         [AllowHtml]
         public string HtmlFormattedFormData
@@ -34,7 +38,7 @@ namespace NicholasPallotti.Models
 
                 //first line of mailing label is 'FirstName, LastName'
                 label.Append(FirstName);
-                label.Append(", ");
+                label.Append(" ");
                 label.Append(LastName);
                 label.Append("<br/>");
 
@@ -52,6 +56,11 @@ namespace NicholasPallotti.Models
 
                 return label.ToString();
             }
+        }
+
+        public Person()
+        {
+            UniqueId = Guid.NewGuid().ToString();
         }
     }
 }

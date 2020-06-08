@@ -5,11 +5,9 @@ namespace NicholasPallotti.Models
 {
     public class PersonViewModel
     {
-        //example of composition, a seperate class for product will be more re-usable 
-        //than having it in the view model
         public Person mailing { get; set; }
 
-        //This is the lisstatest of Manufactures
+        //This is the list of states
         public SelectList StatesList
         {
             get
@@ -29,15 +27,11 @@ namespace NicholasPallotti.Models
                 return new SelectList(states, "State", "ID");
             }
         }
-
-        //constructor creates instance of Product to prevent null reference exceptions
         public PersonViewModel()
         {
             mailing = new Person();
         }
     }
-
-    //this could be in it's own file
     public class State
     {
         public string state { get; set; }

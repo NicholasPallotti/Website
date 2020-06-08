@@ -18,11 +18,6 @@
             padding: 10px;
         }
 
-    /*.well {
-        position: relative;
-        overflow: hidden;
-    }*/
-
     fieldset {
         display: inline-block;
         border-color: darkmagenta;
@@ -30,7 +25,7 @@
         width: 40%;
     }
 
-    .DisplayInput {
+    .MailingLabel {
         background-color: white;
         border: solid 2px black;
         display: inline-block;
@@ -190,9 +185,12 @@
             <tr>
                 <td>
                     @Html.LabelFor(m => m.package.totalCost, "shipping cost")
+                
                 </td>
                 <td>
-                     @Html.TextBoxFor(m => m.package.totalCost)
+                    @*@Html.TextBoxFor(m => m.package.totalCost)*@
+                    @Html.TextBoxFor(m => m.package.totalCost, new { @disabled = "disabled" })
+                    @Html.HiddenFor(m => m.package.uniqueId)
                 </td>
             </tr>
 
@@ -200,33 +198,71 @@
     </fieldset>
 
     <fieldset>
-        <legend>Shipping Label</legend>
+        <legend>Mailing Label</legend>
         <table>
             <tr>
                 <td>
-                    <div class="DisplayInput">
-                        <p>From:</p>
-                        @Html.Raw(Model.package.Sender.HtmlFormattedFormData)
-                        <p>To:</p>
-                        @Html.Raw(Model.package.Recipient.HtmlFormattedFormData)
+                    <div class="MailingLabel" id="MailingLabel">
+                        @*use this helper to display content that has html tags in it*@
+                        @Html.Raw(Model.package.HtmlFormattedMailingLabel)
                     </div>
                 </td>
             </tr>
         </table>
     </fieldset>
-
     <fieldset>
-        <legend>actions</legend>
+        <legend>Actions</legend>
         <table>
             <tr>
                 <td>
-                    <input type="submit" value="Calculate Package Info" />
+                    <input type="button" value="Get Mailing Label" id="MailingLabelButton" />
+                    <input type="Submit" value="Save" name="button" />
                 </td>
+              
             </tr>
         </table>
     </fieldset>
-
 }
+@section scripts{
+    @*Need this for client side data annotations to fire*@
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            //handle mailing label button clicked
+            $("#MailingLabelButton").click(function () {
+
+                //make sure there are not any validation errors
+                if ($("#ShippingForm").valid()) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Shipping", //post to Shipping controller
+                        async: true,
+                        data: $("#ShippingForm").serialize(), //this gets the form data
+                        dataType: 'json', //data type controller method is returning
+                        success: function (data) {
+                            console.log(data);
+                            //server is now returning json object, set the html
+                            //to what is in the package object
+                            $("#MailingLabel").html(data.package.HtmlFormattedMailingLabel);
+
+
+                            //return the total cost
+                            var result = $("#TotalCost");
+                            result.val(data.package.totalCost)
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            console.log(errorThrown);
+                            console.log(XMLHttpRequest);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
+
 
 
 

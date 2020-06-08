@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NicholasPallotti</RootNamespace>
     <AssemblyName>NicholasPallotti</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,16 +49,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -102,6 +101,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -140,17 +140,32 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FileHelper.cs" />
+    <Compile Include="Helpers\PackageDataAccess.cs" />
+    <Compile Include="Helpers\PersonDataAccess.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
+    <Compile Include="Models\FilesViewModel.cs" />
     <Compile Include="Models\OvernightPackage.cs" />
     <Compile Include="Models\Package.cs" />
+    <Compile Include="Models\PackageData.cs" />
+    <Compile Include="Models\PackageListViewModel.cs" />
     <Compile Include="Models\PackageViewModel.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\PersonViewModel.cs" />
+    <Compile Include="Models\SessionHelper.cs" />
     <Compile Include="Models\TwoDayPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Packages.mdf" />
+    <Content Include="App_Data\Packages_log.ldf">
+      <DependentUpon>Packages.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_Data\StudentClassExample.mdf" />
+    <Content Include="App_Data\StudentClassExample_log.ldf">
+      <DependentUpon>StudentClassExample.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -161,9 +176,15 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="HtmlPage1.html" />
+    <Content Include="Images\add.png" />
+    <Content Include="Images\delete.png" />
+    <Content Include="Images\edit.png" />
     <Content Include="Images\gab.jpg" />
+    <Content Include="Images\sortAsc.png" />
+    <Content Include="Images\sortDesc.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App_Data\PackageList.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -192,10 +213,9 @@
     <Content Include="Views\Mailing\Index.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\Shipping\Index.cshtml" />
+    <Content Include="Views\Shipping\ShippingList.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
